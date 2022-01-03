@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hky.mapper.gamename">
+
+	<select id="selectGamenameList" parameterType="HashMap" resultType="BoardDTO">
+		select * from
+		(select
+		rowNum rNum, postNumber, postTopic, postTitle, memId, postDate
+		from (select * from gameName
+		<where>
+			<if test="postTopic != null">
+				postTopic like '%${postTopic}%'
+			</if>
+			<if test="keyfield != null and keyfield.equals('memId')">
+				and memId like '%${keyword}%'
+			</if>
+			<if test="keyfield != null and keyfield.equals('postTitle')">
+				and postTitle like '%${keyword}%'
+			</if>
+			<if test="keyfield != null and keyfield.equals('postContent')">
+				and postContent like '%${keyword}%'
+			</if>
+			<if test="keyfield != null and keyfield.equals('all')">
+				and (memId like '%${keyword}%') or (postTitle like '%${keyword}%') or (postContent like '%${keyword}%')
+			</if>
+		</where>
+		order by postNumber desc))
+		where rNum between ${startrow} and ${endrow}
+	</select>
+	
+	<select id="countGamename" parameterType="HashMap" resultType="int">
+		select
+		count(*)
+		from gameName
+		<where>
+			<if test="postTopic != null">
+				postTopic like '%${postTopic}%'
+			</if>
+			<if test="keyfield != null and keyfield.equals('memId')">
+				and memId like '%${keyword}%'
+			</if>
+			<if test="keyfield != null and keyfield.equals('postTitle')">
+				and postTitle like '%${keyword}%'
+			</if>
+			<if test="keyfield != null and keyfield.equals('postContent')">
+				and postContent like '%${keyword}%'
+			</if>
+			<if test="keyfield != null and keyfield.equals('all')">
+				and (memId like '%${keyword}%') or (postTitle like '%${keyword}%') or (postContent like '%${keyword}%')
+			</if>
+		</where>
+	</select>
+	
+	<select id="selectGamename" parameterType="int" resultType="BoardDTO">
+		select
+		*
+		from gameName
+		where postNumber = ${value}
+	</select>
+	
+	<select id="maxGamenamePostNumber" resultType="int">
+		select
+		max(postNumber)
+		from gameName
+	</select>
+	
+	<insert id="insertGamename" parameterType="BoardDTO">
+		insert
+		into gameName (postNumber, postTopic, postTitle, memId, postContent, postDate, fileName)
+		values (#{postNumber}, #{postTopic}, #{postTitle}, #{memId}, #{postContent}, sysdate, #{fileName, jdbcType=VARCHAR} )
+	</insert>
+	
+	<update id="updateGamename" parameterType="BoardDTO">
+		update gameName
+		set postTopic = #{postTopic}, postTitle = #{postTitle}, postContent = #{postContent}, fileName=#{fileName, jdbcType=VARCHAR}
+		where postNumber = #{postNumber}
+	</update>
+	
+	<delete id="deleteGamename" parameterType="int">
+		delete
+		from gameName
+		where postNumber = ${value}
+	</delete>
+	
+</mapper>

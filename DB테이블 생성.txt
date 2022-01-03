@@ -1,0 +1,32 @@
+create table member(
+memId varchar2(12) primary key,
+memPasswd varchar2(15),
+memEmail varchar2(25),
+memName varchar2(12),
+memPhone varchar2(15),
+memBirth Date,
+memGender char(1),
+memAddress varchar2(90),
+memComment varchar2(90),
+memPoint number,
+memDate Date,
+memNumber number
+);
+create table notice(
+postNumber number primary key,
+postTopic varchar2(6),
+postTitle varchar2(60),
+memId varchar2(12),
+postContent varchar2(900),
+postDate Date,
+fileName varchar2(60)
+);
+CREATE TABLE gamename AS
+SELECT * FROM notice WHERE 1=2;
+commit;
+
+
+//관리자 ID 입력
+insert into member (memId, memPasswd, memNumber)
+values('admin','admin1!',0);
+commit;

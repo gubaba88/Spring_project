@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hky.mapper.notice">
+
+	<select id="selectNoticeList" parameterType="HashMap" resultType="BoardDTO">
+		select * from
+		(select
+		rowNum rNum, postNumber, postTopic, postTitle, memId, postDate
+		from (select * from notice
+		<where>
+			<if test="postTopic != null">
+				postTopic like '%${postTopic}%'
+			</if>
+			<if test="keyfield != null and keyfield.equals('memId')">
+				and memId like '%${keyword}%'
+			</if>
+			<if test="keyfield != null and keyfield.equals('postTitle')">
+				and postTitle like '%${keyword}%'
+			</if>
+			<if test="keyfield != null and keyfield.equals('postContent')">
+				and postContent like '%${keyword}%'
+			</if>
+			<if test="keyfield != null and keyfield.equals('all')">
+				and (memId like '%${keyword}%') or (postTitle like '%${keyword}%') or (postContent like '%${keyword}%')
+			</if>
+		</where>
+		order by postNumber desc))
+		where rNum between ${startrow} and ${endrow}
+	</select>
+	
+	<select id="countNotice" parameterType="HashMap" resultType="int">
+		select
+		count(*)
+		from notice
+		<where>
+			<if test="postTopic != null">
+				postTopic like '%${postTopic}%'
+			</if>
+			<if test="keyfield != null and keyfield.equals('memId')">
+				and memId like '%${keyword}%'
+			</if>
+			<if test="keyfield != null and keyfield.equals('postTitle')">
+				and postTitle like '%${keyword}%'
+			</if>
+			<if test="keyfield != null and keyfield.equals('postContent')">
+				and postContent like '%${keyword}%'
+			</if>
+			<if test="keyfield != null and keyfield.equals('all')">
+				and (memId like '%${keyword}%') or (postTitle like '%${keyword}%') or (postContent like '%${keyword}%')
+			</if>
+		</where>
+	</select>
+	
+	<select id="selectNotice" parameterType="int" resultType="BoardDTO">
+		select
+		*
+		from notice
+		where postNumber = ${value}
+	</select>
+	
+	<select id="maxNoticePostNumber" resultType="int">
+		select
+		max(postNumber)
+		from notice
+	</select>
+	
+	<insert id="insertNotice" parameterType="BoardDTO">
+		insert
+		into notice (postNumber, postTopic, postTitle, memId, postContent, postDate, fileName)
+		values (#{postNumber}, #{postTopic}, #{postTitle}, #{memId}, #{postContent}, sysdate, #{fileName, jdbcType=VARCHAR} )
+	</insert>
+	
+	<update id="updateNotice" parameterType="BoardDTO">
+		update notice
+		set postTopic = #{postTopic}, postTitle = #{postTitle}, postContent = #{postContent}, fileName=#{fileName, jdbcType=VARCHAR}
+		where postNumber = #{postNumber}
+	</update>
+	
+	<delete id="deleteNotice" parameterType="int">
+		delete
+		from notice
+		where postNumber = ${value}
+	</delete>
+	
+</mapper>

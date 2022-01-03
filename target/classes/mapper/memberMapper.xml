@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hky.mapper.member">
+
+	<select id="selectMemberList" parameterType="Hashmap" resultType="MemberDTO">
+		select * from
+		(select
+		rowNum rNum, memNumber, memId, memEmail, memDate
+		from (select * from member 
+		<![CDATA[
+			where memNumber > 0
+		]]>
+		<if test="keyword != null">
+			and memId like '%${keyword}%'
+		</if>
+		order by memNumber desc))
+		where rNum between ${startrow} and ${endrow}
+	</select>
+	
+	<select id="countMember" parameterType="String" resultType="int">
+		select
+		count(*)
+		from member
+		<![CDATA[
+			where memNumber > 0
+		]]>
+		<if test="value != null">
+			and memId like '%${value}%'
+		</if>
+	</select>
+	
+	<insert id="insertMember" parameterType="MemberDTO">
+		insert
+		into member (memId,memPasswd,memEmail,memName,memPhone,memBirth,memGender,memAddress,memComment,memPoint,memDate,memNumber)
+		values (#{memId},#{memPasswd},#{memEmail},#{memName},#{memPhone},#{memBirth},#{memGender},#{memAddress},#{memComment},50,sysdate,#{memNumber})
+	</insert>
+	
+	<select id="maxMemNumber" resultType="int">
+		select
+		max(memNumber) 
+		from member
+	</select>
+	
+	<select id="selectMember" parameterType="String" resultType="MemberDTO">
+		select
+		memId,memPasswd,memEmail,memName,memPhone,to_char(memBirth,'yyyy"년 "mm"월 "dd"일"') memBirth,memGender,memAddress,memComment,memPoint,memDate,memNumber
+		from member
+		where memId = #{value}
+	</select>
+	
+	<update id="updateMember" parameterType="MemberDTO">
+		update member
+		set memPasswd = #{memPasswd}, memEmail = #{memEmail}, memPhone = #{memPhone}, memAddress = #{memAddress}, memComment = #{memComment} 
+		where memId = #{memId}
+	</update>
+	
+	<delete id="deleteMember" parameterType="String">
+		delete
+		from member
+		where memId = #{value}
+	</delete>
+
+</mapper>
