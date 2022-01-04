@@ -96,6 +96,10 @@ public class NoticeBoardController {
 				e.printStackTrace();
 			}
 		}
+		
+		String postContent = boardDTO.getPostContent().replace("\r\n", "<br/>");
+		boardDTO.setPostContent(postContent);
+		
 		boolean result = true;
 		//회원가입을 시도하고 중복된 PK오류 발생시 예외처리하고 결과를 저장한다.
 		try {
@@ -146,6 +150,10 @@ public class NoticeBoardController {
 				e.printStackTrace();
 			}
 		}
+
+		String postContent = boardDTO.getPostContent().replace("\r\n", "<br/>");
+		boardDTO.setPostContent(postContent);
+		
 		noticeBoardService.updateNotice(boardDTO);
 		return "redirect:NoticeSelect?postNumber="+boardDTO.getPostNumber();
 	}

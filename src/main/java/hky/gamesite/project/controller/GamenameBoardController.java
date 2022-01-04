@@ -90,6 +90,10 @@ public class GamenameBoardController {
 				e.printStackTrace();
 			}
 		}
+		
+		String postContent = boardDTO.getPostContent().replace("\r\n", "<br/>");
+		boardDTO.setPostContent(postContent);
+		
 		boolean result = true;
 		try {
 			boardDTO.setPostNumber(gamenameBoardService.insertGamename(boardDTO));
@@ -139,6 +143,10 @@ public class GamenameBoardController {
 				e.printStackTrace();
 			}
 		}
+
+		String postContent = boardDTO.getPostContent().replace("\r\n", "<br/>");
+		boardDTO.setPostContent(postContent);
+		
 		gamenameBoardService.updateGamename(boardDTO);
 		return "redirect:GamenameSelect?postNumber="+boardDTO.getPostNumber();
 	}
