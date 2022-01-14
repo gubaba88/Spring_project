@@ -81,12 +81,11 @@
 			<div class="text-start">
 				<label for="postContent"></label><textarea class="textbox" cols="10" rows="8" name="postContent" id="postContent" placeholder=" 글 내용. String postContent -> Varchar2(900) postContet"></textarea>
 			</div>
-			
+			<p class="m-0"></p>
 			<div>
 				<label for="attachedFile">파일 첨부 : </label>
 				<input type="file" name="attachedFile" id="attachedFile" placeholder="파일 첨부">
 			</div>
-			
 			<p class="m-0"></p>
 			<div style="text-align: right;margin-top: 6px;">
 				<button type="submit" class="btn btn-outline-dark mt-auto">글 작성</button>

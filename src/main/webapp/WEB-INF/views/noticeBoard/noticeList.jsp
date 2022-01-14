@@ -137,7 +137,7 @@ function noticeInsert() {
 		<c:choose>
 			<c:when test="${currentPage == page}">[${page}]</c:when>
 			<c:otherwise>
-				<a href="./NoticeList?page=${start}&postTopic=${param.postTopic}&keyfield=${param.keyfield}&keyword=${param.keyword}">[${page}]</a>&nbsp;
+				<a href="./NoticeList?page=${page}&postTopic=${param.postTopic}&keyfield=${param.keyfield}&keyword=${param.keyword}">[${page}]</a>&nbsp;
 			</c:otherwise>
 		</c:choose>
 	</c:forEach> 

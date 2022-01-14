@@ -65,13 +65,10 @@ $(function() {
 <section class="py-5">
 <div class="container px-4 px-lg-5">
 	<div class="viewBox">
-		<form name="inPost" id="upPost" action="./GamenameUpdate" method="post" enctype="multipart/form-data">
+		<form name="upPost" id="upPost" action="./GamenameUpdate" method="post" enctype="multipart/form-data">
 			<div>
-				<label for="postNumber"></label><input type="text" name="postNumber" id="postNumber" class="postIn"
-					value="${boardDTO.postNumber}" readonly>
 				<label for="memId"></label><input type="text" name="memId" id="memId" class="postIn"
 					value="${boardDTO.memId}" readonly>
-				<label for="postPasswd"></label>
 				<label for="postTopic">&nbsp; 글 주제 : </label>
 				<c:if test="${sessionScope.memId == 'admin'}">
 				<input type="radio" id="postTopic" name="postTopic" value="공지" <c:if test="${boardDTO.postTopic == '공지'}">checked</c:if>><span>공지 &nbsp;</span>
@@ -80,6 +77,8 @@ $(function() {
 				<input type="radio" id="postTopic" name="postTopic" value="스포" <c:if test="${boardDTO.postTopic == '스포'}">checked</c:if>>스포 &nbsp;
 				<input type="radio" id="postTopic" name="postTopic" value="질문" <c:if test="${boardDTO.postTopic == '질문'}">checked</c:if>>질문 &nbsp;
 				<input type="radio" id="postTopic" name="postTopic" value="잡담" <c:if test="${boardDTO.postTopic == '잡담'}">checked</c:if>>잡담
+				<label for="postNumber"></label><input type="hidden" name="postNumber" id="postNumber" class="postIn"
+					value="${boardDTO.postNumber}" readonly>
 			</div>
 			<p class="m-0"></p>
 			<div>
@@ -90,6 +89,7 @@ $(function() {
 			<div class="text-start">
 				<label for="postContent"></label><textarea class="textbox" cols="10" rows="8" name="postContent" id="postContent">${boardDTO.postContent}</textarea>
 			</div>
+			<p class="m-0"></p>
 			<div>
 				<label for="fileName">파일 수정 : </label>${boardDTO.fileName}
 				<input type="hidden" name="fileName" id="fileName" value="${boardDTO.fileName}">

@@ -60,16 +60,15 @@
 <section class="py-5">
 <div class="container px-4 px-lg-5">
 	<div class="viewBox">
-		<form name="inPost" id="upPost" action="./NoticeUpdate" method="post" enctype="multipart/form-data">
+		<form name="upPost" id="upPost" action="./NoticeUpdate" method="post" enctype="multipart/form-data">
 			<div>
-				<label for="postNumber"></label><input type="text" name="postNumber" id="postNumber" class="postIn"
-					value="${boardDTO.postNumber}" readonly>
 				<label for="memId"></label><input type="text" name="memId" id="memId" class="postIn"
 					value="${boardDTO.memId}" readonly>
-				<label for="postPasswd"></label>
 				<label for="postTopic">&nbsp; 글 주제 : </label>
 				<input type="radio" id="postTopic" name="postTopic" value="공지" <c:if test="${boardDTO.postTopic == '공지'}">checked</c:if>><span>공지 &nbsp;</span>
 				<input type="radio" id="postTopic" name="postTopic" value="정보" <c:if test="${boardDTO.postTopic == '정보'}">checked</c:if>><span>정보 &nbsp;</span>
+				<label for="postNumber"></label><input type="hidden" name="postNumber" id="postNumber" class="postIn"
+					value="${boardDTO.postNumber}" readonly>
 			</div>
 			<p class="m-0"></p>
 			<div>

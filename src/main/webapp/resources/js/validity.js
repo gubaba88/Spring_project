@@ -215,6 +215,33 @@ $(function( ) {
 			}
 		}
 	});
+	$("#upPost").validate({
+		errorPlacement: function(error, element) {
+			error.appendTo( element.parent("div").next("p") );
+		},
+		rules : {
+			topic : "required",
+			postTitle : {
+				required : true,
+				maxlength : 20
+			},
+			postContent : {
+				required : true,
+				maxlength : 300
+			}
+		},
+		messages : {
+			topic : "글 주제를 선택하세요.",
+			postTitle : {
+				required : "글 제목를 입력하세요.",
+				maxlength : "글 제목은 최대 {20}글자입니다."
+			},
+			postContent : {
+				required : "내용를 입력하세요.",
+				maxlength : "글 내용은 최대 {300}글자입니다."
+			}
+		}
+	});
 	
 	$("#comment_form").validate({
 		errorPlacement: function(error, element) {
