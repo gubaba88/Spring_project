@@ -1,6 +1,7 @@
 package hky.gamesite.project.controller;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.slf4j.Logger;
@@ -51,6 +52,11 @@ public class NoticeBoardController {
 		if (endpage > maxpage) {
 			endpage = maxpage;
 		}
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd"); 
+		Date now = new Date(); 
+		String day = format.format(now);
+		logger.info(day);
+		model.addAttribute("day", day);
 		model.addAttribute("list", noticeBoardService.selectNoticeList(page, postTopic, keyfield, keyword));
 		model.addAttribute("currentPage", page);
 		model.addAttribute("startPage", startpage);

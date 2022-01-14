@@ -156,6 +156,7 @@ function postInsert() {
 		</select>
 		<label for="keyword"></label>
 		<input type="text" id="keyword" name="keyword" required placeholder= "검색어를 입력하세요.">
+		<label for="postTopic"></label>
 		<input type="hidden" id="postTopic" name="postTopic" value="${param.postTopic}">
 		<button type="submit"> 검색 </button>
 	</form>
