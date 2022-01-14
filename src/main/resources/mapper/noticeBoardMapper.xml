@@ -55,7 +55,7 @@
 		select
 		*
 		from notice
-		where postNumber = ${value}
+		where postNumber = #{postNumber}
 	</select>
 	
 	<select id="maxNoticePostNumber" resultType="int">
@@ -79,7 +79,7 @@
 	<delete id="deleteNotice" parameterType="int">
 		delete
 		from notice
-		where postNumber = ${value}
+		where postNumber = #{postNumber}
 	</delete>
 	
 </mapper>

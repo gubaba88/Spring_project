@@ -110,6 +110,8 @@
 		<div>
 			<form name="comment_form" id="comment_form">
 				<div id="comment">
+					<label></label>
+					<input type="hidden" name="postNumber" value="${boardDTO.postNumber}">
 					<label for="comment_name"></label>
 					<input type="text" name="comment_name" id="comment_name" placeholder="작성자 : String memId -> varchar2(12) memId">
 					<label for="comment_content"></label>

@@ -55,7 +55,7 @@
 		select
 		*
 		from gameName
-		where postNumber = ${value}
+		where postNumber = #{postNumber}
 	</select>
 	
 	<select id="maxGamenamePostNumber" resultType="int">
@@ -79,7 +79,7 @@
 	<delete id="deleteGamename" parameterType="int">
 		delete
 		from gameName
-		where postNumber = ${value}
+		where postNumber = #{postNumber}
 	</delete>
 	
 </mapper>

@@ -36,7 +36,7 @@
 					<label for="save"></label><input type="checkbox" name="save" id="save"> 아이디 저장
 				</span>
 				<span class="text-end">
-					<a type="button" class="btn btn-outline-dark" href='./MemInsert.do'> 회원 가입 </a>
+					<a type="button" class="btn btn-outline-dark" href='./MemberInsert'> 회원 가입 </a>
 				</span>
 			</div>
 		</form>

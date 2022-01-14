@@ -45,7 +45,7 @@
 		select
 		memId,memPasswd,memEmail,memName,memPhone,to_char(memBirth,'yyyy"년 "mm"월 "dd"일"') memBirth,memGender,memAddress,memComment,memPoint,memDate,memNumber
 		from member
-		where memId = #{value}
+		where memId = #{memId}
 	</select>
 	
 	<update id="updateMember" parameterType="MemberDTO">
@@ -57,7 +57,7 @@
 	<delete id="deleteMember" parameterType="String">
 		delete
 		from member
-		where memId = #{value}
+		where memId = #{memId}
 	</delete>
 
 </mapper>
